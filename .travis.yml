@@ -10,6 +10,7 @@ install:
 script: pytest tests
 
 before_deploy:
+  - docker login registry.gitlab.com -u $DOCKER_USER  -p $DOCKER_PASS
   - docker pull registry.gitlab.com/atomatic/dpr-deploy
 deploy:
   skip_cleanup: true
