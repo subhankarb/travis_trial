@@ -15,7 +15,7 @@ before_deploy:
 deploy:
   skip_cleanup: true
   provider: script
-  script: docker run -it registry.gitlab.com/atomatic/dpr-deploy --extra-vars "@external_config.json" --tags "zappa" -v
+  script: docker run -it registry.gitlab.com/atomatic/dpr-deploy --extra-vars "@external_config.json" --tags "zappa"
   on:
     repo: subhankarb/travis_trial
     branch: master
