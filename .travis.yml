@@ -15,8 +15,7 @@ before_deploy:
 deploy:
   skip_cleanup: true
   provider: script
-  script:
-    - >
+  script: >
       docker run -it registry.gitlab.com/atomatic/dpr-deploy
       --extra-vars '{"auth0_global_api_key": "${auth0_global_api_key}",
         "auth0_global_secret": "${auth0_global_secret}",
