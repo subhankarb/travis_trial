@@ -4,6 +4,11 @@ os:
   - linux
 services:
   - docker
+
+install:
+  - pip install -r requirements.txt
+script: pytest tests
+
 before_deploy:
   - docker pull registry.gitlab.com/atomatic/dpr-deploy
 deploy:
