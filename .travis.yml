@@ -27,6 +27,7 @@ deploy:
     "environment_tier": "staging",
     "bit_store_bucket_name": "$bit_store_bucket_name",
     "dpr_js": {"path":"app/static/dpr-js","branch":"gh-pages"}}'
+    --tags "zappa"
   on:
     repo: subhankarb/travis_trial
     branch: master
