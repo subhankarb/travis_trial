@@ -10,12 +10,24 @@ install:
 script: pytest tests
 
 before_deploy:
-  - docker login registry.gitlab.com -u $DOCKER_USER  -p $DOCKER_PASS
+  - docker login -u="$DOCKER_USER"  -p="$DOCKER_PASS" registry.gitlab.com
   - docker pull registry.gitlab.com/atomatic/dpr-deploy
 deploy:
   skip_cleanup: true
   provider: script
-  script: ./build.sh
+  script:
+    - >
+      docker run -it registry.gitlab.com/atomatic/dpr-deploy
+      --extra-vars '{"auth0_global_api_key": "${auth0_global_api_key}",
+        "auth0_global_secret": "${auth0_global_secret}",
+        "auth0_domain": "${auth0_domain}",
+        "aws_key": "${aws_key}", "aws_secret": "${aws_secret}",
+        "domain_name": "${domain_name}", "app_debug": false,
+        "environment_tier": "staging",
+        "bit_store_bucket_name": "${bit_store_bucket_name}",
+        "dpr_js": {"path":"app/static/dpr-js","branch":"gh-pages"}}'
+      --tags "zappa"
+
   on:
     repo: subhankarb/travis_trial
     branch: master
